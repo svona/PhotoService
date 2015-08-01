@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="501036a0-571f-42a8-b24c-10e4bf2a32bd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/Portfolio.PhotoService/PhotoSrv.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PhotoSrv.disco" MetadataType="Disco" ID="7c49e93f-0af7-45a0-bd5e-3671e0c332e7" SourceId="1" SourceUrl="http://localhost/Portfolio.PhotoService/PhotoSrv.svc?disco" />
+    <MetadataFile FileName="PhotoSrv.xsd" MetadataType="Schema" ID="a7de77e7-28a7-4751-91d4-6db5faf790bd" SourceId="1" SourceUrl="http://localhost/Portfolio.PhotoService/PhotoSrv.svc?xsd=xsd1" />
+    <MetadataFile FileName="PhotoSrv1.xsd" MetadataType="Schema" ID="5189fc98-4449-48e5-bbc0-44bf5d412228" SourceId="1" SourceUrl="http://localhost/Portfolio.PhotoService/PhotoSrv.svc?xsd=xsd2" />
+    <MetadataFile FileName="PhotoSrv.wsdl" MetadataType="Wsdl" ID="0513a138-e7e4-435b-a38a-ab41049be1a8" SourceId="1" SourceUrl="http://localhost/Portfolio.PhotoService/PhotoSrv.svc?wsdl" />
+    <MetadataFile FileName="PhotoSrv2.xsd" MetadataType="Schema" ID="6194aec4-9613-466f-a367-099fc7ad1d46" SourceId="1" SourceUrl="http://localhost/Portfolio.PhotoService/PhotoSrv.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

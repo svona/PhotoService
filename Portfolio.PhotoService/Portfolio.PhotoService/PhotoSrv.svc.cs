@@ -107,7 +107,6 @@ namespace Portfolio.PhotoService
                         cmd.Parameters.Add("@contentType", SqlDbType.VarChar, 255).Value = MimeType.GetMimeType(imageFile, null);
                         cmd.Parameters.Add("@md5Checksum", SqlDbType.VarBinary, 16).Value = hash;
 
-
                         using (var sdr = cmd.ExecuteReader())
                         {
                             if (sdr.Read())

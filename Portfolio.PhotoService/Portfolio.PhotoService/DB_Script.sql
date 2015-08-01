@@ -58,7 +58,7 @@ BEGIN
 	insert into ProductPhotoBlobs(ProductId, Blob)
 	output inserted.Blob.PathName() as [PathName], inserted.Id,
 	GET_FILESTREAM_TRANSACTION_CONTEXT() as txContext
-	values(@productId, null)
+	values(@productId, 0x)
 
 	insert into ProductPhotoMetaData(ProductPhotoBlobId, CreatedBy, 
 	LengthInBytes, WidthInPixels, HeightInPixels, ContentType, MD5Checksum)
