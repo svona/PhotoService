@@ -1,11 +1,4 @@
 
-create table Products
-(
-	Id int identity(1,1) not null,
-	CreationDate datetime not null default (GETDATE()),
-	constraint PK_Products primary key(Id)
-)
-
 create Table ProductPhotoBlobs
 (
 	Id int identity(1,1) not null,
@@ -14,7 +7,6 @@ create Table ProductPhotoBlobs
 	ProductId int not null,
 	CreationDate datetime not null default (GETDATE()),
 	constraint PK_PhotoBlobs primary key(Id),
-	constraint FK_ProductPhotoBlobs_Products foreign key(ProductId) references Products(Id),
 	constraint UQ_ProductPhotoBlobs_GuidId unique(GuidId)
 )
 
@@ -30,4 +22,48 @@ create table ProductPhotoMetaData
 	MD5Checksum varbinary(16) not null
 )
 
+GO
 
+create procedure GetPhoto
+(
+	@photoId int
+)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	select a.Blob.PathName() as [PathName], b.ContentType,
+	GET_FILESTREAM_TRANSACTION_CONTEXT() as txContext
+	from ProductPhotoBlobs a
+	inner join ProductPhotoMetaData b on a.Id = b.ProductPhotoBlobId
+	where a.Id = @photoId
+END
+
+GO
+
+create procedure SavePhoto
+(
+	@productId int,
+	@createdBy nvarchar(50),
+	@widthInPixels int,
+	@heightInPixels int,
+	@lengthInBytes int,
+	@contentType varchar(255),
+	@md5Checksum varbinary(16)
+)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	insert into ProductPhotoBlobs(ProductId, Blob)
+	output inserted.Blob.PathName() as [PathName], inserted.Id,
+	GET_FILESTREAM_TRANSACTION_CONTEXT() as txContext
+	values(@productId, null)
+
+	insert into ProductPhotoMetaData(ProductPhotoBlobId, CreatedBy, 
+	LengthInBytes, WidthInPixels, HeightInPixels, ContentType, MD5Checksum)
+	values(SCOPE_IDENTITY(), @createdBy, 
+	@lengthInBytes, @widthInPixels, @heightInPixels, @contentType, @md5Checksum)
+END
+
+GO
