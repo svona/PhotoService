@@ -67,3 +67,27 @@ BEGIN
 END
 
 GO
+
+create procedure ListProductImageMetaData
+(
+	@productId int
+)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT b.Id
+	,b.ProductId
+	,a.CreatedBy
+	,a.CreationDate
+	,a.LengthInBytes
+	,a.WidthInPixels
+	,a.HeightInPixels
+	,a.ContentType
+	,a.MD5Checksum
+	FROM ProductPhotoMetaData a
+	inner join ProductPhotoBlobs b on a.ProductPhotoBlobId = b.Id
+	where b.ProductId = @productId
+END
+
+GO

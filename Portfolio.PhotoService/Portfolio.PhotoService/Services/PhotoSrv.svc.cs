@@ -132,6 +132,41 @@ namespace Portfolio.PhotoService
 
             return photoId;
         }
+
+        public List<PhotoMetaData> ListMetaData(int productId)
+        {
+            var result = new List<PhotoMetaData>();
+            using (var connection = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["PhotosDB"].ConnectionString))
+            {
+                connection.Open();
+                using (var cmd = new SqlCommand("ListProductImageMetaData", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@productId", SqlDbType.Int).Value = productId;
+                    using (var sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            result.Add(new PhotoMetaData
+                            {
+                                Id = sdr.GetValue<int>("Id"),
+                                ProductId = sdr.GetValue<int>("ProductId"),
+                                CreatedBy = sdr.GetValue<string>("CreatedBy", String.Empty),
+                                CreationDate = sdr.GetValue<DateTime>("CreationDate"),
+                                LengthInBytes = sdr.GetValue<int>("LengthInBytes"),
+                                WidthInPixels = sdr.GetValue<int>("WidthInPixels"),
+                                HeightInPixels = sdr.GetValue<int>("HeightInPixels"),
+                                ContentType = sdr.GetValue<string>("ContentType", String.Empty),
+                                Md5Checksum = sdr.GetByteArray("MD5Checksum")
+                            });
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
         #endregion
     }
 }

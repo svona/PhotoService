@@ -12,5 +12,8 @@ namespace Portfolio.PhotoService
     {
         [OperationContract]
         int SavePhoto(int productId, byte[] imageFile, string createdBy);
+
+        [OperationContract]
+        List<PhotoMetaData> ListMetaData(int productId);
     }
 }

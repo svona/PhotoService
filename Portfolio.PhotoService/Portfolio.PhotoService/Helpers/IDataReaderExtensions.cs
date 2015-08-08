@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Portfolio.PhotoService
 {
@@ -13,6 +14,14 @@ namespace Portfolio.PhotoService
         {
             object dbValue = sdr[columnName];
             return dbValue == null || dbValue == DBNull.Value ? defaultValue : (T)dbValue;
+        }
+
+        public static byte[] GetByteArray(this SqlDataReader sdr, string columnName)
+        {
+            var length = sdr.GetBytes(sdr.GetOrdinal(columnName), 0, null, 0, 1);
+            byte[] result = new byte[length];
+            sdr.GetBytes(sdr.GetOrdinal(columnName), 0, result, 0, result.Length);
+            return result;
         }
     }
 }
