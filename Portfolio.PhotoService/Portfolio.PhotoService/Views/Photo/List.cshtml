@@ -1,52 +1,39 @@
 ﻿@model IEnumerable<Portfolio.PhotoService.PhotoMetaData>
 
-@Html.DisplayNameFor(model => model.ProductId)
-@ViewBag.ProductId
+<div class="container">
+    @Html.DisplayNameFor(model => model.ProductId)
+    @ViewBag.ProductId
+</div>
 
-<table class="table">
-
-@foreach (var item in Model) {
-
-    <tr>
-        <th>
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <a href="~/Services/PhotoSrv.svc/GetPhoto/@item.Id">
+            <img style="float:left; margin-right:10px;" class="PhotoSize" src="~/Services/PhotoSrv.svc/GetPhoto/@item.Id" alt="@item.Id" />
+        </a>        
+        <div>
             @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <td>
             @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-    </tr>
-    <tr>
-        <th>
+        </div>
+        <div>
             @Html.DisplayNameFor(model => model.CreationDate)
-        </th>
-        <td>
             @Html.DisplayFor(modelItem => item.CreationDate)
-        </td>
-    </tr>
-    <tr>
-        <th>
+        </div>
+        <div>
             @Html.DisplayNameFor(model => model.LengthInBytes)
-        </th>
-        <td>
             @Html.DisplayFor(modelItem => item.LengthInBytes)
-        </td>
-    </tr>
-    <tr>
-        <th>
-            @Html.DisplayName("Dimensions (In Pixels)")
-        </th>
-        <td>
+        </div>
+        <div>
+            @Html.DisplayName(Portfolio.PhotoService.Resources.DimensionsInPixels)
             @String.Format("{0}x{1}", item.WidthInPixels, item.HeightInPixels)
-        </td>
-    </tr>
-    <tr>
-        <th>
+        </div>
+        <div>
             @Html.DisplayNameFor(model => model.ContentType)
-        </th>
-        <td>
             @Html.DisplayFor(modelItem => item.ContentType)
-        </td>
-    </tr>
-}
-
-</table>
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.Md5Checksum)
+            @String.Concat("0x", BitConverter.ToString(item.Md5Checksum).Replace("-", String.Empty))
+        </div>
+    }
+</div>

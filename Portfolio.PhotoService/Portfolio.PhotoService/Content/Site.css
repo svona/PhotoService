@@ -39,3 +39,8 @@ body {
   height: 60px;
   background-color: #f5f5f5;
 }
+
+.PhotoSize {
+    width:216px;
+    height:162px;
+}

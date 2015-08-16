@@ -25,6 +25,7 @@ namespace Portfolio.PhotoService
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/bootstrap.min.css",
                 "~/Content/site.css"));
         }
     }
