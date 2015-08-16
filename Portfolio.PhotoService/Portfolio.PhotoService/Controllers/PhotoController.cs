@@ -8,6 +8,10 @@ namespace Portfolio.PhotoService.Controllers
 {
     public class PhotoController : Controller
     {
+        #region Private Members
+        private PhotoSrv service = new PhotoSrv();
+        #endregion
+
         #region Index
         // GET: Photo
         public ActionResult Index()
@@ -23,7 +27,9 @@ namespace Portfolio.PhotoService.Controllers
 
         public ActionResult List(int productId)
         {
-            return View();
+            ViewBag.ProductId = productId;
+            var myList = service.ListMetaData(productId);
+            return View(myList);
         }
         #endregion
 
