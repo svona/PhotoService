@@ -11,6 +11,29 @@
     </div>
     <div class="col-md-6">
         <h2>Photo History</h2>
-        <p>Photo History goes here</p>
+        <p>
+            Enter a product ID and click GO.
+        </p>
+        @Html.TextBox("productId", "", new { @class = "form-control", @type = "number" })
+        @*@Html.ActionLink("GO", "List", "Photo", null, new { @class = "btn btn-default" })*@
+        <a id="buttonGO" class="btn btn-default" href="#">GO</a>
     </div>
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+        function isNumeric(n) {
+            return !isNaN(parseInt(n)) && isFinite(n);
+        }
+
+        $('#buttonGO').click(function () {
+            var prodId = $('#productId').val();
+            if (!isNumeric(prodId)) {
+                throw "Product ID must be a number.";
+            }
+
+            var navUrl = '@Url.Action("List", "Photo")' + "?productId=" + prodId;
+            window.location.href = navUrl;
+        })
+    </script>
+}
